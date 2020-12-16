@@ -27,15 +27,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       //   endDrawer: CustomDrawer(),
 
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-            child: Row(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+        ),
+        child: Column(
+          children: [
+            Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(top: 15),
                   child: CircleAvatar(
                     radius: 45,
                     backgroundImage: AssetImage('assets/images/19.jpg'),
@@ -77,65 +78,67 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ],
             ),
-          ),
-          CustomeColumnOfText(
-            title1: 'Home Furniture',
-            subTitle: "Home accessories, some information about us ",
-            titleStyle: customBoldTextStyle(),
-            subTitleStyle: customGrayTextStyle(),
-          ),
-          SizedBox(
-            height: 6,
-          ),
-          CustomeColumnOfText(
-            title1: 'Contact us:',
-            subTitle: "+925 987 956 8923",
-            titleStyle: customBoldTextStyle(),
-            subTitleStyle: customBlueTextStyle(),
-          ),
-          SizedBox(
-            height: 6,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text("Berlin,Germany", style: customGrayTextStyle()),
-            ],
-          ),
-          SizedBox(
-            height: 6,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              CustomButton(
-                height: 25,
-                width: 100,
-                buttonTitle: "Add Product",
-              ),
-              CustomButton(
-                height: 25,
-                width: 100,
-                buttonTitle: "Share",
-              ),
-              CustomButton(
-                height: 25,
-                width: 100,
-                buttonTitle: "Contact Us",
-              )
-            ],
-          ),
-          SizedBox(
-            height: 6,
-          ),
-          Divider(
-            height: 1,
-          ),
-          Container(
-            height: 200,
-            child: GalaryImageView(),
-          ),
-        ],
+            SizedBox(
+              height: 16,
+            ),
+            CustomeColumnOfText(
+              title1: 'Home Furniture',
+              subTitle: "Home accessories, some information about us ",
+              titleStyle: customBoldTextStyle(),
+              subTitleStyle: customGrayTextStyle(),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            CustomeColumnOfText(
+              title1: 'Contact us:',
+              subTitle: "+925 987 956 8923",
+              titleStyle: customBoldTextStyle(),
+              subTitleStyle: customBlueTextStyle(),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text("Berlin,Germany", style: customGrayTextStyle()),
+              ],
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CustomButton(
+                  height: 25,
+                  width: 100,
+                  buttonTitle: "Add Product",
+                ),
+                CustomButton(
+                  height: 25,
+                  width: 100,
+                  buttonTitle: "Share",
+                ),
+                CustomButton(
+                  height: 25,
+                  width: 100,
+                  buttonTitle: "Contact Us",
+                )
+              ],
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Divider(
+              height: 1,
+            ),
+            Expanded(
+              child: GalaryImageView(),
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -259,6 +262,7 @@ class CustomeColumnOfText extends StatelessWidget {
   }
 }
 
+/// GalaryImageView for viewing picture
 class GalaryImageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -266,14 +270,14 @@ class GalaryImageView extends StatelessWidget {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           childAspectRatio: 1,
           crossAxisCount: 3,
-          crossAxisSpacing: 6,
-          mainAxisSpacing: 6,
+          crossAxisSpacing: 2,
+          mainAxisSpacing: 2,
         ),
         itemCount: imagesList.length,
         itemBuilder: (context, index) {
           return Container(
-            height: 100,
-            width: 100,
+            height: 50,
+            width: 50,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(imagesList[index]),
