@@ -1,16 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_app/images_moke.dart';
 import 'package:shopping_app/utilities/customTextStyle.dart';
-import 'package:shopping_app/utilities/cutomDrawer.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
-  DrawerController _drawerController = new DrawerController(
-      child: CustomDrawer(), alignment: DrawerAlignment.end);
+class _ProfileScreenState extends State<ProfileScreen>
+    with SingleTickerProviderStateMixin {
+  TabController tabController;
+  int currentIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    currentIndex =1;
+    tabController = TabController(
+    length: 3,
+    vsync: this
+    ,
+    );
+  }
+
+  grtCircleAvatar() {
+    return CircleAvatar(
+      backgroundColor: Colors.red[900],
+      radius: 3,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -135,39 +153,56 @@ class _ProfileScreenState extends State<ProfileScreen> {
               height: 1,
             ),
             Expanded(
-              child: GalaryImageView(),
-            ),
+              child:  GalaryImageView(),
+            )
           ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentIndex,
         type: BottomNavigationBarType.fixed,
-        onTap: (value) {},
+        onTap: (value) {
+          tabController.animateTo(value);
+          currentIndex = value;
+          print(value);
+          setState(() {});
+        },
         items: [
           BottomNavigationBarItem(
               label: '',
-              icon: Icon(
-                Icons.home,
-                color: Colors.grey[900],
+              icon: Column(
+                children: [
+                  Icon(Icons.home, color: Colors.grey[900],),
+                  currentIndex == 0 ? Container() : grtCircleAvatar(),
+                ],
               )),
-          BottomNavigationBarItem(label: '', icon: Icon(Icons.search)),
+          BottomNavigationBarItem(
+              label: '',
+              icon: Column(
+                children: [
+                  Icon(Icons.search),
+                  currentIndex == 1 ? Container() : grtCircleAvatar(),
+
+                ],
+              )),
           BottomNavigationBarItem(
               label: '',
               icon: Column(
                 children: [
                   Icon(Icons.favorite_border),
-                  CircleAvatar(
-                    backgroundColor: Colors.red[900],
-                    radius: 3,
-                  ),
+                  currentIndex == 2 ? Container() : grtCircleAvatar(),
+
                 ],
               )),
           BottomNavigationBarItem(
-            label: '',
-            icon: Icon(
-              Icons.person,
-            ),
-          )
+              label: '',
+              icon: Column(
+                children: [
+                  Icon(Icons.person),
+                  currentIndex == 3 ? Container() : grtCircleAvatar(),
+
+                ],
+              )),
         ],
       ),
     );
@@ -270,8 +305,8 @@ class GalaryImageView extends StatelessWidget {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           childAspectRatio: 1,
           crossAxisCount: 3,
-          crossAxisSpacing: 2,
-          mainAxisSpacing: 2,
+          crossAxisSpacing: 6,
+          mainAxisSpacing: 6,
         ),
         itemCount: imagesList.length,
         itemBuilder: (context, index) {
